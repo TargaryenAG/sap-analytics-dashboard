@@ -9,6 +9,21 @@
   ![License](https://img.shields.io/badge/License-MIT-yellow.svg?style=for-the-badge)
 </div>
 
+## 📸 Screenshots
+
+<div align="center">
+  <img src="./docs/preview.png" alt="Overview Dashboard" width="100%"/>
+  <p><em>Overview — KPIs, revenue trend e spend breakdown</em></p>
+</div>
+
+<table>
+  <tr>
+    <td><img src="./docs/sales.png" alt="Sales SD"/><br/><em>Sales & Distribution (SD)</em></td>
+    <td><img src="./docs/procurement.png" alt="Procurement MM"/><br/><em>Procurement (MM)</em></td>
+    <td><img src="./docs/finance.png" alt="Finance FI"/><br/><em>Finance (FI)</em></td>
+  </tr>
+</table>
+
 ## ✨ Features
 - 📈 **Sales Analytics (SD Module)** — Revenue trends, regional performance, customer ranking
 - 🛒 **Procurement Analytics (MM Module)** — PO volume, vendor scorecard, spend-by-category
