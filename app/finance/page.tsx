@@ -2,55 +2,17 @@ import { BarChart2, Banknote, Clock } from 'lucide-react'
 import Header from '@/components/layout/Header'
 import KPICard from '@/components/ui/KPICard'
 import SectionCard from '@/components/ui/SectionCard'
-import DataTable, { type Column } from '@/components/ui/DataTable'
+import CostCenterTable from '@/components/ui/CostCenterTable'
 import PLChart from '@/components/charts/PLChart'
 import RevenueChart from '@/components/charts/RevenueChart'
-import {
-  plData,
-  budgetActualData,
-  costCenterData,
-  type CostCenter,
-} from '@/lib/mockData'
+import { plData, budgetActualData, costCenterData } from '@/lib/mockData'
 import { formatBRL } from '@/lib/utils'
 
-// Adapt budgetActualData to MonthlyRevenue shape for RevenueChart
 const budgetChartData = budgetActualData.map((d) => ({
   month: d.month,
   revenue: d.actual,
   target: d.budget,
 }))
-
-const costCenterColumns: Column<CostCenter>[] = [
-  { key: 'code', header: 'Centro de Custo', sortable: false },
-  { key: 'description', header: 'Descrição', sortable: false },
-  {
-    key: 'budget',
-    header: 'Orçado',
-    align: 'right',
-    render: (v) => formatBRL(v as number),
-  },
-  {
-    key: 'actual',
-    header: 'Realizado',
-    align: 'right',
-    render: (v) => formatBRL(v as number),
-  },
-  {
-    key: 'variancePct',
-    header: 'Variação %',
-    align: 'center',
-    render: (v) => {
-      const pct = v as number
-      const color = pct > 0 ? 'text-red-400' : 'text-emerald-400'
-      return (
-        <span className={`font-semibold ${color}`}>
-          {pct > 0 ? '+' : ''}
-          {pct.toFixed(1)}%
-        </span>
-      )
-    },
-  },
-]
 
 export default function FinancePage() {
   return (
@@ -108,10 +70,7 @@ export default function FinancePage() {
 
         {/* Cost centers table */}
         <SectionCard title="Centros de Custo" subtitle="Orçado vs. Realizado — 2026">
-          <DataTable<CostCenter>
-            columns={costCenterColumns}
-            data={costCenterData}
-          />
+          <CostCenterTable data={costCenterData} />
         </SectionCard>
       </div>
     </div>

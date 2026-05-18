@@ -2,60 +2,17 @@ import { ShoppingCart, Users, TrendingUp } from 'lucide-react'
 import Header from '@/components/layout/Header'
 import KPICard from '@/components/ui/KPICard'
 import SectionCard from '@/components/ui/SectionCard'
-import DataTable, { type Column } from '@/components/ui/DataTable'
+import VendorTable from '@/components/ui/VendorTable'
 import SpendCategoryChart from '@/components/charts/SpendCategoryChart'
 import RevenueChart from '@/components/charts/RevenueChart'
-import {
-  spendByCategory,
-  procurementData,
-  vendorData,
-  type VendorData,
-} from '@/lib/mockData'
+import { spendByCategory, procurementData, vendorData } from '@/lib/mockData'
 import { formatBRL } from '@/lib/utils'
 
-// Adapt procurementData to the MonthlyRevenue shape expected by RevenueChart
 const poMonthlyData = procurementData.map((d) => ({
   month: d.month,
   revenue: d.poValue,
-  target: d.poValue * 1.05, // illustrative 5% over-budget target line
+  target: d.poValue * 1.05,
 }))
-
-const vendorColumns: Column<VendorData>[] = [
-  { key: 'name', header: 'Fornecedor' },
-  { key: 'cnpj', header: 'CNPJ', sortable: false },
-  {
-    key: 'score',
-    header: 'Score',
-    align: 'center',
-    render: (v) => {
-      const score = v as number
-      const color =
-        score >= 90
-          ? 'text-emerald-400'
-          : score >= 80
-          ? 'text-yellow-400'
-          : 'text-red-400'
-      return <span className={`font-semibold ${color}`}>{score}</span>
-    },
-  },
-  {
-    key: 'onTimeDelivery',
-    header: 'OTIF %',
-    align: 'center',
-    render: (v) => `${(v as number).toFixed(1)}%`,
-  },
-  {
-    key: 'poCount',
-    header: 'Qtd OCs',
-    align: 'center',
-  },
-  {
-    key: 'totalSpend',
-    header: 'Gasto Total',
-    align: 'right',
-    render: (v) => formatBRL(v as number),
-  },
-]
 
 export default function ProcurementPage() {
   return (
@@ -113,10 +70,7 @@ export default function ProcurementPage() {
 
         {/* Vendor performance table */}
         <SectionCard title="Performance de Fornecedores" subtitle="Scorecard — 2026">
-          <DataTable<VendorData>
-            columns={vendorColumns}
-            data={vendorData}
-          />
+          <VendorTable data={vendorData} />
         </SectionCard>
       </div>
     </div>
